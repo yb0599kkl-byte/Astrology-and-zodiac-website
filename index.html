@@ -3,303 +3,377 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AstroGuide - Astrology & Zodiac Signs</title>
+<title>AstroGuide</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
-    color:white;
+background:linear-gradient(
+180deg,
+#050816,
+#0b1026,
+#131a3a
+);
+color:white;
+overflow-x:hidden;
+}
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-1;
+background-image:
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 1px, transparent 1px);
+background-size:100px 100px;
+animation:moveStars 60s linear infinite;
+opacity:0.7;
+}
+
+@keyframes moveStars{
+from{
+transform:translateY(0);
+}
+to{
+transform:translateY(-1000px);
+}
 }
 
 header{
-    text-align:center;
-    padding:80px 20px;
+text-align:center;
+padding:80px 20px;
 }
 
 header h1{
-    font-size:3rem;
-    margin-bottom:10px;
+font-size:3.5rem;
+margin-bottom:15px;
 }
 
 header p{
-    color:#d1d5db;
-    max-width:700px;
-    margin:auto;
+max-width:700px;
+margin:auto;
+color:#d1d5db;
 }
 
 nav{
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(10px);
-    padding:15px;
-    position:sticky;
-    top:0;
+position:sticky;
+top:0;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+padding:15px;
+z-index:10;
 }
 
 nav ul{
-    list-style:none;
-    display:flex;
-    justify-content:center;
-    gap:30px;
+display:flex;
+justify-content:center;
+gap:25px;
+list-style:none;
 }
 
 nav a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
+color:white;
+text-decoration:none;
+font-weight:bold;
 }
 
 .section{
-    padding:60px 10%;
+padding:70px 10%;
 }
 
 .section h2{
-    text-align:center;
-    margin-bottom:30px;
-    font-size:2rem;
+text-align:center;
+margin-bottom:35px;
+font-size:2rem;
 }
 
-.zodiac-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+.grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
 .card{
-    background:rgba(255,255,255,0.1);
-    padding:20px;
-    border-radius:15px;
-    transition:0.3s;
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:15px;
+transition:0.3s;
 }
 
 .card:hover{
-    transform:translateY(-8px);
-    background:rgba(255,255,255,0.15);
+transform:translateY(-8px);
+background:rgba(255,255,255,0.15);
 }
 
 .card h3{
-    margin-bottom:10px;
+margin-bottom:10px;
 }
 
-.daily{
-    text-align:center;
+.center{
+text-align:center;
 }
 
 button{
-    background:#f59e0b;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    border-radius:8px;
-    cursor:pointer;
-    margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:#f59e0b;
+color:white;
+cursor:pointer;
+font-size:16px;
 }
 
 button:hover{
-    background:#d97706;
+background:#d97706;
 }
 
-#fortune{
-    margin-top:20px;
-    font-size:1.1rem;
-    color:#fde68a;
+input{
+padding:12px;
+border:none;
+border-radius:10px;
+font-size:16px;
+}
+
+#fortune,
+#result{
+margin-top:20px;
+font-size:1.2rem;
+color:#fde68a;
 }
 
 footer{
-    text-align:center;
-    padding:30px;
-    background:rgba(0,0,0,0.25);
-    margin-top:50px;
+padding:30px;
+text-align:center;
+background:rgba(0,0,0,0.3);
 }
+
 </style>
 </head>
+
 <body>
 
+<div class="stars"></div>
+
 <nav>
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#zodiac">Zodiac Signs</a></li>
-        <li><a href="#daily">Daily Horoscope</a></li>
-    </ul>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#zodiac">Zodiac</a></li>
+<li><a href="#horoscope">Horoscope</a></li>
+<li><a href="#calculator">Calculator</a></li>
+</ul>
 </nav>
 
 <header>
-    <h1>✨ AstroGuide ✨</h1>
-    <p>
-        Discover the mysteries of astrology, zodiac signs, personality traits,
-        and daily cosmic insights.
-    </p>
+<h1>✨ AstroGuide ✨</h1>
+<p>
+Discover astrology, zodiac signs,
+personality traits, and cosmic guidance.
+</p>
 </header>
 
 <section id="about" class="section">
-    <h2>About Astrology</h2>
-    <p style="text-align:center; max-width:800px; margin:auto;">
-        Astrology is the study of celestial bodies and their influence on human life.
-        The zodiac consists of 12 signs, each associated with unique personality traits,
-        strengths, and challenges.
-    </p>
+<h2>About Astrology</h2>
+<p class="center">
+Astrology studies how celestial bodies
+relate to human experiences and personality.
+The zodiac consists of 12 signs,
+each with unique characteristics.
+</p>
 </section>
 
 <section id="zodiac" class="section">
-    <h2>12 Zodiac Signs</h2>
+<h2>12 Zodiac Signs</h2>
 
-    <div class="zodiac-grid">
+<div class="grid">
 
-        <div class="card">
-            <h3>♈ Aries</h3>
-            <p>Bold, energetic, and adventurous leaders.</p>
-        </div>
+<div class="card">
+<h3>♈ Aries</h3>
+<p>Bold, energetic and adventurous.</p>
+</div>
 
-        <div class="card">
-            <h3>♉ Taurus</h3>
-            <p>Reliable, patient, and practical individuals.</p>
-        </div>
+<div class="card">
+<h3>♉ Taurus</h3>
+<p>Reliable and practical.</p>
+</div>
 
-        <div class="card">
-            <h3>♊ Gemini</h3>
-            <p>Curious, social, and quick-witted thinkers.</p>
-        </div>
+<div class="card">
+<h3>♊ Gemini</h3>
+<p>Curious and social.</p>
+</div>
 
-        <div class="card">
-            <h3>♋ Cancer</h3>
-            <p>Emotional, caring, and deeply intuitive.</p>
-        </div>
+<div class="card">
+<h3>♋ Cancer</h3>
+<p>Caring and intuitive.</p>
+</div>
 
-        <div class="card">
-            <h3>♌ Leo</h3>
-            <p>Confident, creative, and charismatic.</p>
-        </div>
+<div class="card">
+<h3>♌ Leo</h3>
+<p>Confident and charismatic.</p>
+</div>
 
-        <div class="card">
-            <h3>♍ Virgo</h3>
-            <p>Analytical, organized, and detail-oriented.</p>
-        </div>
+<div class="card">
+<h3>♍ Virgo</h3>
+<p>Analytical and organized.</p>
+</div>
 
-        <div class="card">
-            <h3>♎ Libra</h3>
-            <p>Balanced, charming, and diplomatic.</p>
-        </div>
+<div class="card">
+<h3>♎ Libra</h3>
+<p>Balanced and charming.</p>
+</div>
 
-        <div class="card">
-            <h3>♏ Scorpio</h3>
-            <p>Passionate, determined, and mysterious.</p>
-        </div>
+<div class="card">
+<h3>♏ Scorpio</h3>
+<p>Passionate and determined.</p>
+</div>
 
-        <div class="card">
-            <h3>♐ Sagittarius</h3>
-            <p>Optimistic, adventurous, and freedom-loving.</p>
-        </div>
+<div class="card">
+<h3>♐ Sagittarius</h3>
+<p>Optimistic and adventurous.</p>
+</div>
 
-        <div class="card">
-            <h3>♑ Capricorn</h3>
-            <p>Ambitious, disciplined, and responsible.</p>
-        </div>
+<div class="card">
+<h3>♑ Capricorn</h3>
+<p>Ambitious and disciplined.</p>
+</div>
 
-        <div class="card">
-            <h3>♒ Aquarius</h3>
-            <p>Innovative, independent, and visionary.</p>
-        </div>
+<div class="card">
+<h3>♒ Aquarius</h3>
+<p>Innovative and independent.</p>
+</div>
 
-        <div class="card">
-            <h3>♓ Pisces</h3>
-            <p>Compassionate, artistic, and imaginative.</p>
-        </div>
+<div class="card">
+<h3>♓ Pisces</h3>
+<p>Compassionate and imaginative.</p>
+</div>
 
-    </div>
+</div>
 </section>
 
-<section id="daily" class="section daily">
-    <h2>Daily Horoscope Generator</h2>
-    <p>Click below to receive a cosmic message.</p>
+<section id="horoscope" class="section center">
 
-    <button onclick="showFortune()">Reveal Horoscope</button>
+<h2>Daily Horoscope</h2>
 
-    <div id="fortune"></div>
+<button onclick="showFortune()">
+Reveal Horoscope
+</button>
+
+<div id="fortune"></div>
+
+</section>
+
+<section id="calculator" class="section center">
+
+<h2>Zodiac Sign Calculator</h2>
+
+<input type="date" id="birthdate">
+
+<br><br>
+
+<button onclick="findZodiac()">
+Find My Zodiac Sign
+</button>
+
+<div id="result"></div>
+
 </section>
 
 <footer>
-    <p>🌙 AstroGuide © 2026 | Astrology & Zodiac Insights</p>
+🌙 AstroGuide © 2026
 </footer>
 
 <script>
-function findZodiac() {
-    <section class="section">
-    <h2>Zodiac Sign Calculator</h2>
 
-    <div style="text-align:center;">
-        <input type="date" id="birthdate"
-        style="padding:10px;border-radius:8px;border:none;font-size:16px;">
-
-        <br><br>
-
-        <button onclick="findZodiac()">Find My Zodiac Sign</button>
-
-        <h3 id="result" style="margin-top:20px;"></h3>
-    </div>
-</section>
-    const birthdate = new Date(
-        document.getElementById("birthdate").value
-    );
-
-    const day = birthdate.getDate();
-    const month = birthdate.getMonth() + 1;
-
-    let sign = "";
-
-    if ((month == 3 && day >= 21) || (month == 4 && day <= 19))
-        sign = "♈ Aries";
-    else if ((month == 4 && day >= 20) || (month == 5 && day <= 20))
-        sign = "♉ Taurus";
-    else if ((month == 5 && day >= 21) || (month == 6 && day <= 20))
-        sign = "♊ Gemini";
-    else if ((month == 6 && day >= 21) || (month == 7 && day <= 22))
-        sign = "♋ Cancer";
-    else if ((month == 7 && day >= 23) || (month == 8 && day <= 22))
-        sign = "♌ Leo";
-    else if ((month == 8 && day >= 23) || (month == 9 && day <= 22))
-        sign = "♍ Virgo";
-    else if ((month == 9 && day >= 23) || (month == 10 && day <= 22))
-        sign = "♎ Libra";
-    else if ((month == 10 && day >= 23) || (month == 11 && day <= 21))
-        sign = "♏ Scorpio";
-    else if ((month == 11 && day >= 22) || (month == 12 && day <= 21))
-        sign = "♐ Sagittarius";
-    else if ((month == 12 && day >= 22) || (month == 1 && day <= 19))
-        sign = "♑ Capricorn";
-    else if ((month == 1 && day >= 20) || (month == 2 && day <= 18))
-        sign = "♒ Aquarius";
-    else
-        sign = "♓ Pisces";
-
-    document.getElementById("result").innerHTML =
-        "Your Zodiac Sign is " + sign;
-}
 const fortunes = [
-    "A new opportunity may appear today. Stay open-minded.",
-    "Trust your instincts; they may guide you well.",
-    "Positive energy surrounds your relationships.",
-    "Focus on your goals and avoid distractions.",
-    "Creativity will help solve a challenge today.",
-    "A meaningful conversation may bring clarity.",
-    "Patience could lead to a rewarding outcome.",
-    "Take time for self-care and reflection.",
-    "Your confidence can inspire those around you.",
-    "Small steps today can create big results tomorrow."
+"Today is perfect for a fresh start.",
+"Trust your intuition today.",
+"An exciting opportunity may appear.",
+"Focus on your goals.",
+"Good news could arrive soon.",
+"Your creativity is strong today.",
+"Positive energy surrounds you.",
+"A meaningful conversation awaits.",
+"Patience brings rewards.",
+"Take time for self-care."
 ];
 
 function showFortune(){
-    const random =
-        fortunes[Math.floor(Math.random() * fortunes.length)];
 
-    document.getElementById("fortune").innerHTML =
-        "🔮 " + random;
+let random =
+fortunes[
+Math.floor(Math.random()*fortunes.length)
+];
+
+document.getElementById("fortune")
+.innerHTML="🔮 "+random;
+
 }
+
+function findZodiac(){
+
+const birthdate =
+new Date(
+document.getElementById("birthdate").value
+);
+
+const day = birthdate.getDate();
+const month = birthdate.getMonth()+1;
+
+let sign="";
+
+if((month==3&&day>=21)||(month==4&&day<=19))
+sign="♈ Aries";
+
+else if((month==4&&day>=20)||(month==5&&day<=20))
+sign="♉ Taurus";
+
+else if((month==5&&day>=21)||(month==6&&day<=20))
+sign="♊ Gemini";
+
+else if((month==6&&day>=21)||(month==7&&day<=22))
+sign="♋ Cancer";
+
+else if((month==7&&day>=23)||(month==8&&day<=22))
+sign="♌ Leo";
+
+else if((month==8&&day>=23)||(month==9&&day<=22))
+sign="♍ Virgo";
+
+else if((month==9&&day>=23)||(month==10&&day<=22))
+sign="♎ Libra";
+
+else if((month==10&&day>=23)||(month==11&&day<=21))
+sign="♏ Scorpio";
+
+else if((month==11&&day>=22)||(month==12&&day<=21))
+sign="♐ Sagittarius";
+
+else if((month==12&&day>=22)||(month==1&&day<=19))
+sign="♑ Capricorn";
+
+else if((month==1&&day>=20)||(month==2&&day<=18))
+sign="♒ Aquarius";
+
+else
+sign="♓ Pisces";
+
+document.getElementById("result")
+.innerHTML=
+"✨ Your Zodiac Sign is "+sign;
+
+}
+
 </script>
 
 </body>
