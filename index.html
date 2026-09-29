@@ -228,6 +228,58 @@ footer{
 </footer>
 
 <script>
+function findZodiac() {
+    <section class="section">
+    <h2>Zodiac Sign Calculator</h2>
+
+    <div style="text-align:center;">
+        <input type="date" id="birthdate"
+        style="padding:10px;border-radius:8px;border:none;font-size:16px;">
+
+        <br><br>
+
+        <button onclick="findZodiac()">Find My Zodiac Sign</button>
+
+        <h3 id="result" style="margin-top:20px;"></h3>
+    </div>
+</section>
+    const birthdate = new Date(
+        document.getElementById("birthdate").value
+    );
+
+    const day = birthdate.getDate();
+    const month = birthdate.getMonth() + 1;
+
+    let sign = "";
+
+    if ((month == 3 && day >= 21) || (month == 4 && day <= 19))
+        sign = "♈ Aries";
+    else if ((month == 4 && day >= 20) || (month == 5 && day <= 20))
+        sign = "♉ Taurus";
+    else if ((month == 5 && day >= 21) || (month == 6 && day <= 20))
+        sign = "♊ Gemini";
+    else if ((month == 6 && day >= 21) || (month == 7 && day <= 22))
+        sign = "♋ Cancer";
+    else if ((month == 7 && day >= 23) || (month == 8 && day <= 22))
+        sign = "♌ Leo";
+    else if ((month == 8 && day >= 23) || (month == 9 && day <= 22))
+        sign = "♍ Virgo";
+    else if ((month == 9 && day >= 23) || (month == 10 && day <= 22))
+        sign = "♎ Libra";
+    else if ((month == 10 && day >= 23) || (month == 11 && day <= 21))
+        sign = "♏ Scorpio";
+    else if ((month == 11 && day >= 22) || (month == 12 && day <= 21))
+        sign = "♐ Sagittarius";
+    else if ((month == 12 && day >= 22) || (month == 1 && day <= 19))
+        sign = "♑ Capricorn";
+    else if ((month == 1 && day >= 20) || (month == 2 && day <= 18))
+        sign = "♒ Aquarius";
+    else
+        sign = "♓ Pisces";
+
+    document.getElementById("result").innerHTML =
+        "Your Zodiac Sign is " + sign;
+}
 const fortunes = [
     "A new opportunity may appear today. Stay open-minded.",
     "Trust your instincts; they may guide you well.",
